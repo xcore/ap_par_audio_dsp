@@ -44,21 +44,8 @@ Note: crossover_proc produces 2 output channels (low and high freqs) from 1 inpu
  - iis: 
  I2S interface to codec. up to 6 channels in, 8 channels out
  See Audio Data Flow
- - audio_buffers
- Receives sample stream into input buffers (pingpong buffer per channel)
- Sends sample stream from output buffers (pingpong buffer per channel) 
- Switches pingpong buffers
- Note: the buffers are in shared memory between this thread and the DSP processing threads
-* Timing Checks:
- - timing_checks.xta defines static timing checks on real time code
- The checks are run at compile time
- To analyse the routes it in the GUI, Click "Timing->Time" and then run the .xta script
- Note: The script is tool generated but I added comments denoted by #####
- The script is automatically run at compile time, does the xta check and prints a summary:
-  Route(0) function: biquad_cascade_block
-    Pass, Num Paths: 9, Slack: 480.4 us, Required: 667.0 us, Worst: 186.6 us, Min Core Frequency: 139 MHz
- Note: This means the equaliser needs 29% of the max time it can take at 48kHz. 
-  This means it would meet the timing at 96kHz sampling rate as well
+ - mswait: wait a number of milliseconds
+ - clkgen : generates PLL input clock
 * Audio Data Flow (per channel):
  - iis thread 
   ouputs samples of NUM_IN stereo channels over NUM_IN streaming channels
@@ -71,15 +58,22 @@ Note: crossover_proc produces 2 output channels (low and high freqs) from 1 inpu
 * Coefficient Generation:
  - All coefficients were created with https://github.com/xcore/sc_dsp_filters 
  - The Makefile configurations can be found in in the source code next to the coefficients
-* Debug Support: (controlled by Debug Switches in defines.h)
- - XScope Probes for Equaliser input and output (Oscilloscope view of sample streams from HW in realtime)
- - Ability to override ADC audio input with custom reference signals.
- - Option to run on simulator (for development/debug without HW)
- - Audio Loopback (to test iis interface)
- - XTA timing checks
-* User Guide:
- - DSP threads can be plugged in to process selected channels on core0 as shown in main()
- - Configuration Options:
+
+Debug Support
+=================
+* XScope Probes for Equaliser input and output (Oscilloscope view of sample streams from HW in realtime)
+* Ability to override ADC audio input with custom reference signals.
+* Option to run on simulator (for development/debug without HW)
+* Audio Loopback (to test iis interface)
+* XTA timing checks 
+The checks are run at compile time (see timing_checks.xta script)
+To analyse the routes it in the GUI, Click "Timing->Time" and then run the .xta script
+The script is automatically run at compile time, does the xta check and prints a summary:
+
+User Guide
+=================
+* DSP threads can be plugged in to process selected channels on core0 as shown in main()
+* Configuration Options:
   Number of input and output channels (NUM_IN, NUM_OUT)
   Set of DSP threads (see main()) 
   EQ Bands (EQ_BANKS)
@@ -87,7 +81,7 @@ Note: crossover_proc produces 2 output channels (low and high freqs) from 1 inpu
   Debug Switches (see defines.h). 
 Note: To use XScope XDE 11.2 tools are required. Add xscope library to compile.
 Note: Make sure NUM_IN and NUM_OUT matches the set of DSP threads connected to the streaming channels
- - Tool aspects
+* Tool aspects
   Device options (Simulator or Hardware) can be selected in "Run Configurations" and "Debug Configurations"
   For more information see Tools User Guide.
 
