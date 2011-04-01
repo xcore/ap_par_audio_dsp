@@ -36,16 +36,16 @@ Firmware Overview
 * HW Platform: XR-USB-AUDIO-2.0-MC
 * DSP Threads:
  - eq_wrapper
- 5-Band Equaliser processing 2 channels using peak EQ filters.
- receives control commands to change EQ settings
- Can send level metering data
+5-Band Equaliser processing 2 channels using peak EQ filters.
+receives control commands to change EQ settings
+Can send level metering data
  - crossover
- Using highshelf filter to suppress frequs above 500Hz, lowshelf filter to suppress freqs below 500Hz
- Note: crossover_proc produces 2 output channels (low and high freqs) from 1 input channel
+Using highshelf filter to suppress frequs above 500Hz, lowshelf filter to suppress freqs below 500Hz
+Note: crossover_proc produces 2 output channels (low and high freqs) from 1 input channel
  - delays
- Using a delay buffer, delays audio of left channel by 5000 samples (0.1 seconds at 48kHz)
+Using a delay buffer, delays audio of left channel by 5000 samples (0.1 seconds at 48kHz)
  - eq_client
- Periodically Changes Equaliser setup on the fly by switching between different Equaliser Presets.
+Periodically Changes Equaliser setup on the fly by switching between different Equaliser Presets.
 * Other Threads:
  - iis: 
  I2S interface to codec. up to 6 channels in, 8 channels out
