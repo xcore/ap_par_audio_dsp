@@ -33,12 +33,12 @@ To Do
 
 Firmware Overview
 =================
-HW Platform: 
+* HW Platform: 
 - XR-USB-AUDIO-2.0-MC
 
-DSP Threads:
+* DSP Threads:
 - eq_wrapper
- 5-Band Equaliser processing 2 channels using peak EQ filters.
+5-Band Equaliser processing 2 channels using peak EQ filters.
  receives control commands to change EQ settings
  Can send level metering data
 - crossover
@@ -48,8 +48,7 @@ DSP Threads:
  Using a delay buffer, delays audio of left channel by 5000 samples (0.1 seconds at 48kHz)
 - eq_client
  Periodically Changes Equaliser setup on the fly by switching between different Equaliser Presets.
-
-Other Threads:
+* Other Threads:
 - iis: 
  I2S interface to codec. up to 6 channels in, 8 channels out
  See Audio Data Flow
@@ -58,8 +57,7 @@ Other Threads:
  Sends sample stream from output buffers (pingpong buffer per channel) 
  Switches pingpong buffers
  Note: the buffers are in shared memory between this thread and the DSP processing threads
-
-Timing Checks:
+* Timing Checks:
 - timing_checks.xta defines static timing checks on real time code
  The checks are run at compile time
  To analyse the routes it in the GUI, Click "Timing->Time" and then run the .xta script
@@ -69,8 +67,7 @@ Timing Checks:
     Pass, Num Paths: 9, Slack: 480.4 us, Required: 667.0 us, Worst: 186.6 us, Min Core Frequency: 139 MHz
  Note: This means the equaliser needs 29% of the max time it can take at 48kHz. 
   This means it would meet the timing at 96kHz sampling rate as well
-
-Audio Data Flow (per channel):
+* Audio Data Flow (per channel):
 - iis thread 
   ouputs samples of NUM_IN stereo channels over NUM_IN streaming channels
   inputs samples of NUM_OUT stereo channels over NUM_IN streaming channels
@@ -78,21 +75,17 @@ Audio Data Flow (per channel):
   input samples over streaming channel(s)
   process the stream on a per-sample basis 
   output samples over streaming channel(s). 
- 
-Input-Output latency: <= one sample period
-
-Coefficient Generation:
+* Input-Output latency: <= one sample period
+* Coefficient Generation:
 - All coefficients were created with https://github.com/xcore/sc_dsp_filters 
 - The Makefile configurations can be found in in the source code next to the coefficients
-
-Debug Support: (controlled by Debug Switches in defines.h)
+* Debug Support: (controlled by Debug Switches in defines.h)
 - XScope Probes for Equaliser input and output (Oscilloscope view of sample streams from HW in realtime)
 - Ability to override ADC audio input with custom reference signals.
 - Option to run on simulator (for development/debug without HW)
 - Audio Loopback (to test iis interface)
 - XTA timing checks
-
-User Guide:
+* User Guide:
 - DSP threads can be plugged in to process selected channels on core0 as shown in main()
 - Configuration Options:
   Number of input and output channels (NUM_IN, NUM_OUT)
