@@ -1,0 +1,44 @@
+XMOS Audio DSP example using shared memory and parallel processing.
+===================================================================
+
+Release version: 0.6
+
+Firmware
+========
+* 0.6
+Fixed bug (coefficients loaded in wrong order) in assembly version of biquad.
+Added Simulator mode for development/debug without HW.
+XTA script run during compilation.
+Improved structure for github
+
+* 0.5
+Replaced Shared memory buffering scheme with communication over streaming channels.
+  Block processing is not necessary for Biquad.
+  Channels are more efficient for per-sample processing of the stream (saves memory and instructions per sample)
+  Note: For shared memory version contact: thomas@xmos.com 
+Integrated the latest Biquad Package from https://github.com/xcore/sc_dsp_filters:
+  Optimised Assembly Biquad implementation, Saturation
+
+* 0.4 
+Improved Equaliser (now using Peak EQ filters)
+Increased attenuation of crossover shelf filters
+Fixed delay buffers and delays example.
+XTA timing checks.
+Refactoring and cleanup
+Improved README.txt
+Added swc_cascaded_biquad package for generating coefficients for lowshelf, highshelf and peak EQ filters
+
+* 0.3
+Override Input and output signals with custom signal generators
+XScope Probes (real-time oscilloscope-style analysis) in IIC interface code.
+
+* 0.2 
+Added Crossover using Low Shelf and High Shelf Filters. Crossover frequency 500 Hz
+
+* 0.1
+Added xta timing checks. See README.txt
+Increased Biquad BANKS to 5
+Activated Cascaded Biquads (they were accidentally disabled in 0.0)
+
+
+

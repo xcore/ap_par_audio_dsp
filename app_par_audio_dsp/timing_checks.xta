@@ -1,0 +1,11 @@
+# load "/Users/thomas_mac/Dropbox/git/external/xcore_github/ap_par_audio_DSP/app_par_audio_DSP/bin/XR-USB-AUDIO-2.0-MC/app_par_audio_DSP.xe"
+
+#
+# Route: function: biquad_cascade_eq
+#
+analyze function biquad_cascade_eq
+# Warning: '0x103a0' is a non-portable reference.
+set loop - call_0,0x103a0 5
+set required - 21.0 us
+
+print summary
