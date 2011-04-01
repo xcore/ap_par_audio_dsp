@@ -25,7 +25,6 @@ Key Features
 * Configurability. See User Guide Section
 * Wealth of Debug Features (See Debug section)
 
-
 To Do
 =====
 
@@ -35,29 +34,29 @@ Firmware Overview
 =================
 * HW Platform: XR-USB-AUDIO-2.0-MC
 * DSP Threads:
- - eq_wrapper : 5-Band Equaliser processing 2 channels using peak EQ filters. Receives control commands to change EQ settings. Can send level metering data
- - crossover : Using highshelf filter to suppress frequs above 500Hz, lowshelf filter to suppress freqs below 500Hz
+  - eq_wrapper : 5-Band Equaliser processing 2 channels using peak EQ filters. Receives control commands to change EQ settings. Can send level metering data
+  - crossover : Using highshelf filter to suppress frequs above 500Hz, lowshelf filter to suppress freqs below 500Hz
 Note: crossover_proc produces 2 output channels (low and high freqs) from 1 input channel
- - delays : Using a delay buffer, delays audio of left channel by 5000 samples (0.1 seconds at 48kHz)
- - eq_client : Periodically Changes Equaliser setup on the fly by switching between different Equaliser Presets.
+  - delays : Using a delay buffer, delays audio of left channel by 5000 samples (0.1 seconds at 48kHz)
+  - eq_client : Periodically Changes Equaliser setup on the fly by switching between different Equaliser Presets.
 * Other Threads:
- - iis: 
- I2S interface to codec. up to 6 channels in, 8 channels out
- See Audio Data Flow
- - mswait: wait a number of milliseconds
- - clkgen : generates PLL input clock
+  - iis: 
+I2S interface to codec. up to 6 channels in, 8 channels out
+See Audio Data Flow
+  - mswait: wait a number of milliseconds
+  - clkgen : generates PLL input clock
 * Audio Data Flow (per channel):
- - iis thread 
-  ouputs samples of NUM_IN stereo channels over NUM_IN streaming channels
-  inputs samples of NUM_OUT stereo channels over NUM_IN streaming channels
- - DSP threads
-  input samples over streaming channel(s)
-  process the stream on a per-sample basis 
-  output samples over streaming channel(s). 
+  - iis thread 
+ouputs samples of NUM_IN stereo channels over NUM_IN streaming channels
+inputs samples of NUM_OUT stereo channels over NUM_IN streaming channels
+  - DSP threads
+input samples over streaming channel(s)
+process the stream on a per-sample basis 
+output samples over streaming channel(s). 
 * Input-Output latency: <= one sample period
 * Coefficient Generation:
- - All coefficients were created with https://github.com/xcore/sc_dsp_filters 
- - The Makefile configurations can be found in in the source code next to the coefficients
+  - All coefficients were created with https://github.com/xcore/sc_dsp_filters 
+  - The Makefile configurations can be found in in the source code next to the coefficients
 
 Debug Support
 =================
