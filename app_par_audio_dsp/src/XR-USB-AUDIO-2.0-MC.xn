@@ -10,7 +10,7 @@ xsi:schemaLocation="http://www.xmos.com http://www.xmos.com">
   </Declarations>
 
   <Nodes>
-      <Node Id="0" Type="XS1-L1A" oscillator="13Mhz" systemfrequency="500Mhz" referencefrequency="100MHz">
+      <Node Id="0" InPackageId="0" Type="XS1-L1A" oscillator="13Mhz" systemfrequency="500Mhz" referencefrequency="100MHz">
       <Core Number="0" Reference="stdcore[0]">
         <Port Location="XS1_PORT_1A" Name="PORT_SPI_MISO"/>
         <Port Location="XS1_PORT_1B" Name="PORT_SPI_SS"/>
@@ -34,7 +34,7 @@ xsi:schemaLocation="http://www.xmos.com http://www.xmos.com">
         <Bootee NodeId="1"/>
       </Boot>
     </Node>
-    <Node Id="1" Type="XS1-L1A" oscillator="13Mhz" systemfrequency="500MHz" referencefrequency="100MHz">
+    <Node Id="1" InPackageId="1" Type="XS1-L1A" oscillator="13Mhz" systemfrequency="500MHz" referencefrequency="100MHz">
       <Boot>
         <Source Location="XMOSLINK"/>
       </Boot>

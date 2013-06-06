@@ -44,6 +44,6 @@ struct iis {
 // samples are returned left-aligned
 // e.g. 24-bit audio will look like 0x12345600 (positive) or 0xFF123400 (negative)
 // termination: send a control token down c_out, will be pinged back via c_in
-void iis(struct iis &r_iis, streaming chanend c_in[], streaming chanend c_out[]);
+void iis(struct iis &r_iis, streaming chanend c_in[NUM_IN], streaming chanend c_out[NUM_OUT]);
 
 #endif
